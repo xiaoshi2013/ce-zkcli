@@ -1,0 +1,30 @@
+{
+"zkUrl":"106.3.42.193:2181",
+"redis" : [
+      {
+        "nodeName": "CHN-SH-H-3do&redis&1",
+        "ip": "222.73.233.243",
+        "serviceGroup": "redis",
+        "state":"active",
+        "hostPort":"6379",
+        "serviceID": "1"
+    },
+    {
+        "nodeName": "CHN-SH-H-3do&redis&2",
+        "ip": "222.73.233.243",
+        "serviceGroup": "redis",
+        "state":"active",
+        "hostPort":"7379",
+        "serviceID": "2"
+    },
+    {
+        "nodeName": "CHN-SH-H-3do&redis&3",
+        "ip": "222.73.233.243",
+        "serviceGroup": "redis",
+        "state":"active",
+        "hostPort":"8379",
+        "serviceID": "3"
+    }
+]
+}
+
