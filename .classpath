@@ -40,14 +40,14 @@
 			<attribute name="javadoc_location" value="jar:file:/H:/m2/repo/org/codehaus/jackson/jackson-core-asl/1.9.12/jackson-core-asl-1.9.12-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/redis/clients/jedis/2.1.0/jedis-2.1.0.jar" sourcepath="M2_REPO/redis/clients/jedis/2.1.0/jedis-2.1.0-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/org/fusesource/sigar/1.6.4/sigar-1.6.4.jar" sourcepath="M2_REPO/org/fusesource/sigar/1.6.4/sigar-1.6.4-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/H:/m2/repo/redis/clients/jedis/2.1.0/jedis-2.1.0-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/H:/m2/repo/org/fusesource/sigar/1.6.4/sigar-1.6.4-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/commons-pool/commons-pool/1.5.5/commons-pool-1.5.5.jar" sourcepath="M2_REPO/commons-pool/commons-pool/1.5.5/commons-pool-1.5.5-sources.jar">
+	<classpathentry kind="var" path="M2_REPO/com/google/guava/guava/14.0.1/guava-14.0.1.jar" sourcepath="M2_REPO/com/google/guava/guava/14.0.1/guava-14.0.1-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/H:/m2/repo/commons-pool/commons-pool/1.5.5/commons-pool-1.5.5-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/H:/m2/repo/com/google/guava/guava/14.0.1/guava-14.0.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
