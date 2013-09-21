@@ -19,9 +19,8 @@ public class CeNodeProps {
 	public static final String HOSTNAME="hostName";
 	public static final String PID="pid";
 	public static final String SERVICEGROUP="serviceGroup";
-	public static final String SERVICEID="serviceID";
+	//public static final String SERVICEID="serviceID";
 	public static final String FTPDIR="ftpDir";
-	
 	
 	private String nodeName; // 节点名称标识 必须
 	private String hostName; // 节点hostname
@@ -30,7 +29,7 @@ public class CeNodeProps {
 	private String serviceGroup; // 节点所属的服务名称 必须
 	private String state; // 节点状态 必须
 	private String pid; // java进程id
-	private String serviceID; // 服务id 标识用
+	//private String serviceID; // 服务id 标识用
 	private String ftpDir; // ftp文件目录
 
 	public CeNodeProps(Map<String, Object> propMap) {
@@ -42,18 +41,18 @@ public class CeNodeProps {
 		// this.operation = propMap.get("operation").toString();
 		this.hostPort = (String)propMap.get(HOSTPORT);
 		this.pid = (String)propMap.get(PID);
-		this.serviceID = (String)propMap.get(SERVICEID);
+		//this.serviceID = (String)propMap.get(SERVICEID);
 		this.ftpDir = (String)propMap.get(FTPDIR);
 
 	}
 
 
 
-	public static CeNodeProps load(byte[] bytes) {
+/*	public static CeNodeProps load(byte[] bytes) {
 		Map<String, Object> props = (Map<String, Object>) ZkStateReader.fromJSON(bytes, HashMap.class);
 		return new CeNodeProps(props);
 
-	}
+	}*/
 	
 	public Map<String, String> toMap(){
 		Map<String, String> map=new HashMap<String, String>();
@@ -62,7 +61,7 @@ public class CeNodeProps {
 		map.put(STATE, this.state);
 		map.put(HOSTPORT, this.hostPort);
 		map.put(SERVICEGROUP, this.serviceGroup);
-		map.put(SERVICEID, this.serviceID);
+		//map.put(SERVICEID, this.serviceID);
 		map.put(HOSTNAME, this.hostName);
 		map.put(PID, this.pid);
 		map.put(FTPDIR, this.ftpDir);
@@ -116,14 +115,6 @@ public class CeNodeProps {
 
 	public void setIp(String ipStr) {
 		this.ip = ipStr;
-	}
-
-	public String getServiceID() {
-		return serviceID;
-	}
-
-	public void setServiceID(String serviceID) {
-		this.serviceID = serviceID;
 	}
 
 	public String getPid() {

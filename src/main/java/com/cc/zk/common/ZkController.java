@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 
 import com.cc.zk.CeNodeProps;
 
-
 /**
  * Handle ZooKeeper interactions.
+ * 
  * @author zhanglei
- *
+ * 
  */
 public class ZkController {
 
@@ -26,7 +26,6 @@ public class ZkController {
 
 	private List<CeNodeProps> nodePropsList;
 
-
 	public ZkController(String zkServerAddress, int zkClientTimeout, int zkClientConnectTimeout,
 			List<CeNodeProps> nodePropsList) {
 		this.zkClient = new ZkClient(zkServerAddress, zkClientTimeout, zkClientConnectTimeout,
@@ -37,11 +36,10 @@ public class ZkController {
 					public void command() {
 						System.out.println("ZkController.ZkController(...).new OnReconnect() {...}.command()");
 						try {
-							//zkStateReader.createClusterStateWatchersAndUpdate();
+							// zkStateReader.createClusterStateWatchersAndUpdate();
 
 							createEphemeralLiveNode();
 
-						
 						} catch (Exception e) {
 							CeException.log(log, "", e);
 							throw new ZooKeeperException(CeException.ErrorCode.SERVER_ERROR, "", e);
@@ -64,7 +62,7 @@ public class ZkController {
 
 		for (int i = 0; i < nodePropsList.size(); i++) {
 			String nodeName = nodePropsList.get(i).getNodeName();
-			String nodePath = ZkStateReader.LIVE_NODES_ZKNODE + "/"+ nodePropsList.get(i).getServiceGroup()+"/" + nodeName;
+			String nodePath = ZkStateReader.LIVE_NODES_ZKNODE + "/" + nodeName;
 			log.info("Register node as live in ZooKeeper:" + nodePath);
 
 			try {
@@ -92,15 +90,41 @@ public class ZkController {
 
 	}
 
-	
+	public void sendState(byte[] data) throws KeeperException, InterruptedException {
+		for (int i = 0; i < nodePropsList.size(); i++) {
+			String nodeName = nodePropsList.get(i).getNodeName();
+			String nodePath = ZkStateReader.LIVE_NODES_ZKNODE + "/" + nodeName;
+
+			boolean b = zkClient.exists(nodePath, true);
+			if (!b) {
+				zkClient.makePath(nodePath, data, CreateMode.EPHEMERAL, true);
+			} else {
+				zkClient.setData(nodePath, data, true);
+			}
+
+		}
+
+	}
 
 	/**
 	 * 将本节点注册到zk上
 	 */
 	private void init() {
 		try {
+			boolean createdWatchesAndUpdated = false;
+			if (zkClient.exists(ZkStateReader.LIVE_NODES_ZKNODE, true)) {
+				zkStateReader.getRemoteLiveNodes();
+				createdWatchesAndUpdated = true;
+
+			}
+
 			zkCmdExecutor.ensureExists(ZkStateReader.LIVE_NODES_ZKNODE, zkClient);
 			createEphemeralLiveNode();
+
+			if (!createdWatchesAndUpdated) {
+				zkStateReader.getRemoteLiveNodes();
+			}
+
 		} catch (KeeperException e) {
 			log.error("", e);
 			throw new ZooKeeperException(CeException.ErrorCode.SERVER_ERROR, "", e);
@@ -115,8 +139,5 @@ public class ZkController {
 	public ZkStateReader getZkStateReader() {
 		return zkStateReader;
 	}
-
-
-	
 
 }

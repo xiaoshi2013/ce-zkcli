@@ -17,8 +17,6 @@
  */
 package com.cc.zk.common;
 
-import java.io.IOException;
-
 import org.apache.zookeeper.KeeperException;
 
 /**
